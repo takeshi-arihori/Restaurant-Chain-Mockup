@@ -157,7 +157,7 @@
         echo "<h3>Markdown Representation</h3>";
         echo "<div class='markdown'>{$restaurantChain->toMarkdown()}</div>";
 
-        echo "<h3>Array Representation</h3>";
+        echo "<h3>Array Representation (Simplified)</h3>";
         echo "<pre>" . print_r($restaurantChain->toArray(), true) . "</pre>";
 
         echo "</div>";
@@ -169,18 +169,18 @@
 
   <script>
     // Get all modal elements
-    var modals = document.getElementsByClassName("modal");
+    let modals = document.getElementsByClassName("modal");
 
     // Get all button elements
-    var buttons = document.querySelectorAll("button[id$='Btn']");
+    let buttons = document.querySelectorAll("button[id$='Btn']");
 
     // Get all <span> elements that close the modal
-    var spans = document.getElementsByClassName("close");
+    let spans = document.getElementsByClassName("close");
 
     // When the user clicks the button, open the modal
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].onclick = function() {
-        var modal = document.getElementById(buttons[i].id.replace('Btn', 'Modal'));
+        let modal = document.getElementById(buttons[i].id.replace('Btn', 'Modal'));
         modal.style.display = "block";
       }
     }
