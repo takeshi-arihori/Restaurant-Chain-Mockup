@@ -2,10 +2,12 @@
 
 namespace Models\Companies;
 
-class RestaurantChain extends Company
+use Interfaces\FileConvertible;
+
+class RestaurantChain extends Company implements FileConvertible
 {
   private int $chainId;
-  private array $restaurantLocations; // array of RestaurantLocation objects
+  private array $restaurantLocations;
   private string $cuisineType;
   private int $numberOfLocations;
   private string $parentCompany;
@@ -56,6 +58,16 @@ class RestaurantChain extends Company
   public function displayAllLocations()
   {
     // Implement method to display all locations
+  }
+
+  public function getName(): string
+  {
+    return $this->name;
+  }
+
+  public function getParentCompany(): string
+  {
+    return $this->parentCompany;
   }
 
   public function toString(): string

@@ -21,18 +21,22 @@
 │ └── php.ini
 ├── src/
 │ ├── Helpers/
+│ │ └── RandomGenerator.php
 │ ├── Interfaces/
 │ │ └── FileConvertible.php
 │ ├── Models/
-│ │ ├── Company/
+│ │ ├── Companies/
 │ │ │ ├── Company.php
 │ │ │ └── RestaurantChain.php
+│ │ ├── Location/
+│ │ │ └── RestaurantLocation.php
 │ │ ├── User/
 │ │ │ ├── Employee.php
 │ │ │ └── User.php
 │ └── index.php
 ├── compose.yml
 └── .env
+
 
 ```
 
