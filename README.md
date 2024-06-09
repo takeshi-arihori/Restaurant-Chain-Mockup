@@ -1,13 +1,62 @@
-# Restaurant-Chain-Mockup
+# レストランチェーン管理システム
 
-## プロジェクト名と目的
+このプロジェクトは、レストランチェーン、そのロケーション、および従業員のモックデータを生成するための管理システムです。PHP と Faker を使用してランダムなデータを作成し、ウェブインターフェースで情報を表示します。
 
-- レストランチェーン企業のモックアップページを作成
-- 生成された偽のデータで埋める作業に取り組みます。
+## 目次
 
-レストランチェーンの詳細、各ロケーション、従業員の情報を効率的に管理するためのレストランチェーン管理システムの開発が割り当てられました。このシステムは PHP で実装し、オブジェクト指向のアプローチを使用してモジュール性とメンテナンスの容易さを確保します。
+- [インストール](#インストール)
+- [使用方法](#使用方法)
+- [ディレクトリ構成](#ディレクトリ構成)
+- [データの生成方法を変更する](#データの生成方法を変更する)
+
+## 前提
+
+- Docker がインストールされていること
+- Composer がインストールされていること
+
+## インストール
+
+1. **Docker コンテナを起動する:**
+
+   ```sh
+   docker compose up -d
+   ```
+
+   これにより、PHP、MySQL、Nginx のコンテナが起動します。
+
+2. **リポジトリをクローンする:**
+
+   ```sh
+   git clone https://github.com/yourusername/restaurant-chain-management.git
+   cd restaurant-chain-management
+   ```
+
+3. **docker 内で`faker`をインストールする:**
+
+- [参考](https://github.com/takeshi-arihori/til/blob/main/docker/faker-php.md)
+
+  Composer がインストールされていることを確認し、以下のコマンドを実行します:
+
+  ```sh
+  docker compose exec app bash
+  cd /var/www/html
+  composer require fakerphp/faker
+  ```
+
+## 使用方法
+
+アプリケーションを読み込むと、レストランチェーンのリストと基本情報が表示されます。各レストランチェーンのカードには「詳細を見る」ボタンがあり、クリックするとモーダルで詳細情報が表示されます。
+
+表示される詳細情報には以下が含まれます:
+
+- 文字列表現
+- HTML 表現
+- Markdown 表現
+- 配列表現（簡略版）
 
 ## ディレクトリ構成
+
+プロジェクトのディレクトリ構成は以下の通りです:
 
 ```
 .
@@ -31,79 +80,57 @@
 │ │ ├── Location/
 │ │ │ └── RestaurantLocation.php
 │ │ ├── User/
-│ │ │ ├── Employee.php
-│ │ │ └── User.php
+│ │ ├── Employee.php
+│ │ └── User.php
 │ └── index.php
 ├── compose.yml
 └── .env
-
-
 ```
 
-## クラス図
+## データの生成方法を変更する
 
-- **Employee クラス**（User クラスを拡張）
+`src/Helpers/RandomGenerator.php` ファイルのメソッドを編集して、生成するデータの数を増減させることができます。例えば、従業員の数やレストランのロケーション数を変更するには以下の部分を修正します:
 
-  - 職種（string）: 従業員の職種
-  - 給与（float）: 従業員の給与
-  - 開始日（DateTime）: 従業員がレストランでの雇用を開始した日付
-  - 賞（array）: 従業員が獲得した賞の配列
+```php
+public static function restaurantLocation(): RestaurantLocation {
+    $faker = Factory::create();
 
-- **Company クラス**
+    return new RestaurantLocation(
+        $faker->company,
+        $faker->address,
+        $faker->city,
+        $faker->state,
+        $faker->postcode,
+        self::employees(2, 5), // 従業員の数を制限
+        $faker->boolean,
+        $faker->boolean
+    );
+}
 
-  - 会社名（string）: 会社の名称
-  - 設立年（int）: 会社が設立された年
-  - 説明（string）: 会社の簡単な説明
-  - ウェブサイト（string）: 会社の公式ウェブサイトの URL
-  - 電話（string）: 会社の連絡先電話番号
-  - 業界（string）: 会社が事業を展開している業界
-  - CEO（string）: 会社の CEO の名前
-  - 公開取引の有無（bool）: 会社が公開取引されているかどうかを示します
+public static function restaurantChain(): RestaurantChain {
+    $faker = Factory::create();
 
-- **RestaurantChain クラス**（Company クラスを拡張）
-  - チェーン ID（int）: レストランチェーンの一意の識別子
-  - レストランの場所（array）: レストランチェーンの異なる場所を表す RestaurantLocation オブジェクトの配列
-  - 料理の種類（string）: レストランチェーンで提供される料理の種類
-  - 場所の総数（int）: チェーン内のレストランの総数
-  - ドライブスルーの有無（bool）: チェーンのレストランにドライブスルーがあるかどうかを示します
-  - 設立年（int）: レストランチェーンが設立された年
-  - 親会社（string）: 親会社の名前（該当する場合）
+    return new RestaurantChain(
+        $faker->randomNumber(),
+        self::restaurantLocations(1, 3), // 場所の数を制限
+        $faker->randomElement(['Italian', 'Chinese', 'American', 'Japanese']),
+        $faker->numberBetween(1, 3),
+        $faker->company,
+        $faker->company,
+        $faker->year,
+        $faker->text,
+        $faker->url,
+        $faker->phoneNumber,
+        $faker->companySuffix,
+        $faker->name,
+        $faker->boolean,
+        $faker->country,
+        $faker->name,
+        $faker->numberBetween(10, 1000)
+    );
+}
+```
 
-## 仕様
-
-### 仕様 1
-
-すべてのクラスは FileConvertible インターフェースを実装する必要があります。インターフェースは以下の通りです。
-
-### 仕様 2
-
-仕様に従ってすべてのクラスを作成します。
-
-- **Company クラス**
-
-  - 会社名、設立年、説明、ウェブサイト、連絡先の電話番号、業界、CEO の名前、および公開取引されているかどうかを含む会社情報を表示するメソッドが必要です。
-
-- **User クラス**
-
-  - 以前使用したコードを再利用する必要があります。
-
-- **Employee クラス**
-
-  - 従業員の職種、給与、就職日、および受賞リストを表示するメソッドが必要です。
-
-- **RestaurantLocation クラス**
-
-  - 場所の名前、住所、市区町村、州、郵便番号、および現在開いているかどうかを表示するメソッドが必要です。
-
-- **RestaurantChain クラス**
-  - チェーンに新しいレストランの場所を追加するメソッド
-  - チェーン内のすべてのレストランの場所を表示するメソッド
-  - チェーンに関する情報を表示するメソッド（Company から継承）
-
-### 仕様 3
-
-ページの読み込み時に、ページにはランダムに生成された RestaurantChain のモックが表示され、それに関連するすべての情報が表示されます。これには、その場所、その場所の従業員、および会社の詳細が含まれます。
-
-### モックデータ
-
-各クラスには、ランダムな値を使ってそのクラスのオブジェクトを生成する役割を持つ RandomGenerator という名前の静的メソッドが必要です。このメソッドによって、実際のデータを使わずにシステムのテストやデモンストレーションが可能になります。
+`self::employees(2, 5)` の部分で、従業員の最小数と最大数を設定しています。
+`self::restaurantLocations(1, 3)` の部分で、ロケーションの最小数と最大数を設定しています。
+必要に応じてこれらの数値を変更することで、生成するデータの量を調整できます。
