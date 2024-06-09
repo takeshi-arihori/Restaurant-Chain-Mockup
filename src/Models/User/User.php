@@ -117,9 +117,11 @@ class User implements FileConvertible
                  - Email: {$this->email}
                  - Phone Number: {$this->phoneNumber}
                  - Address: {$this->address}
-                 - Birth Date: {$this->birthDate}
+                 - Birth Date: {$this->birthDate->format('Y-m-d')}
+                 - Membership Expiration Date: {$this->membershipExpirationDate->format('Y-m-d')}
                  - Role: {$this->role}";
   }
+
   public function toArray(): array
   {
     return [
@@ -129,7 +131,8 @@ class User implements FileConvertible
       'email' => $this->email,
       'phoneNumber' => $this->phoneNumber,
       'address' => $this->address,
-      'birthDate' => $this->birthDate,
+      'birthDate' => $this->birthDate->format('Y-m-d'),
+      'membershipExpirationDate' => $this->membershipExpirationDate->format('Y-m-d'),
       'role' => $this->role
     ];
   }

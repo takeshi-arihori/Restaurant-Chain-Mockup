@@ -2,9 +2,7 @@
 
 namespace Models\Companies;
 
-use Interfaces\FileConvertible;
-
-class RestaurantChain extends Company implements FileConvertible
+class RestaurantChain extends Company
 {
   private int $chainId;
   private array $restaurantLocations; // array of RestaurantLocation objects
