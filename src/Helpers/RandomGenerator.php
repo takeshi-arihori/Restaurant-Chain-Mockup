@@ -81,7 +81,7 @@ class RandomGenerator
       $faker->city,
       $faker->state,
       $faker->postcode,
-      self::employees(5, 20),
+      self::employees(2, 5), // 従業員の数を制限
       $faker->boolean,
       $faker->boolean
     );
@@ -93,9 +93,9 @@ class RandomGenerator
 
     return new RestaurantChain(
       $faker->randomNumber(),
-      self::restaurantLocations(3, 10),
+      self::restaurantLocations(1, 3), // 場所の数を制限
       $faker->randomElement(['Italian', 'Chinese', 'American', 'Japanese']),
-      $faker->numberBetween(3, 10),
+      $faker->numberBetween(1, 3),
       $faker->company,
       $faker->company,
       $faker->year,
