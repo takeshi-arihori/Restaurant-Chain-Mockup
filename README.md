@@ -1,0 +1,2 @@
+# Restaurant-Chain-Mockup
+レストランチェーン企業のモックアップページを作成し、fakerで生成された偽のデータを作成
