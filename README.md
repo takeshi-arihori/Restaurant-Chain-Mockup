@@ -2,6 +2,9 @@
 
 このプロジェクトは、レストランチェーン、そのロケーション、および従業員のモックデータを生成するための管理システムです。PHP と Faker を使用してランダムなデータを作成し、ウェブインターフェースで情報を表示します。
 
+<img width="1576" alt="スクリーンショット 2024-06-09 19 24 13" src="https://github.com/takeshi-arihori/Restaurant-Chain-Mockup/assets/83809409/0fad5c01-da3e-49b9-b3b2-cce37b003604">
+<img width="1601" alt="スクリーンショット 2024-06-09 19 24 21" src="https://github.com/takeshi-arihori/Restaurant-Chain-Mockup/assets/83809409/91a4ff2f-002c-41cd-a678-31523a0754e4">
+
 ## 目次
 
 - [インストール](#インストール)
