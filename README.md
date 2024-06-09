@@ -20,9 +20,20 @@
 │ ├── Dockerfile
 │ └── php.ini
 ├── src/
-│    └── index.php
+│ ├── Helpers/
+│ ├── Interfaces/
+│ │ └── FileConvertible.php
+│ ├── Models/
+│ │ ├── Company/
+│ │ │ ├── Company.php
+│ │ │ └── RestaurantChain.php
+│ │ ├── User/
+│ │ │ ├── Employee.php
+│ │ │ └── User.php
+│ └── index.php
 ├── compose.yml
 └── .env
+
 ```
 
 ## クラス図

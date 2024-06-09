@@ -1,6 +1,6 @@
 <?php
 
-namespace Models\Company;
+namespace Models\Companies;
 
 use Interfaces\FileConvertible;
 
