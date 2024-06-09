@@ -157,13 +157,8 @@
         echo "<h3>Markdown Representation</h3>";
         echo "<div class='markdown'>{$restaurantChain->toMarkdown()}</div>";
 
-        echo "<h3>Array Representation (Simplified)</h3>";
-        echo "<pre>" . print_r([
-          'name' => $restaurantChain->getName(),
-          'companyName' => $restaurantChain->getParentCompany(),
-          'locations' => count($restaurantChain->toArray()['restaurantLocations']),
-          'cuisineType' => $restaurantChain->toArray()['cuisineType']
-        ], true) . "</pre>";
+        echo "<h3>Array Representation</h3>";
+        echo "<pre>" . print_r($restaurantChain->toArray(), true) . "</pre>";
 
         echo "</div>";
         echo "</div>";
@@ -174,18 +169,18 @@
 
   <script>
     // Get all modal elements
-    let modals = document.getElementsByClassName("modal");
+    var modals = document.getElementsByClassName("modal");
 
     // Get all button elements
-    let buttons = document.querySelectorAll("button[id$='Btn']");
+    var buttons = document.querySelectorAll("button[id$='Btn']");
 
     // Get all <span> elements that close the modal
-    let spans = document.getElementsByClassName("close");
+    var spans = document.getElementsByClassName("close");
 
     // When the user clicks the button, open the modal
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].onclick = function() {
-        let modal = document.getElementById(buttons[i].id.replace('Btn', 'Modal'));
+        var modal = document.getElementById(buttons[i].id.replace('Btn', 'Modal'));
         modal.style.display = "block";
       }
     }
