@@ -11,6 +11,11 @@ class RestaurantChain extends Company implements FileConvertible
   private string $cuisineType;
   private int $numberOfLocations;
   private string $parentCompany;
+  private int $numEmployees;
+  private float $salaryMin;
+  private float $salaryMax;
+  private int $zipMin;
+  private int $zipMax;
 
   public function __construct(
     int $chainId,
@@ -68,6 +73,23 @@ class RestaurantChain extends Company implements FileConvertible
   public function getParentCompany(): string
   {
     return $this->parentCompany;
+  }
+
+  public function setEmployeeRange(int $numEmployees)
+  {
+    $this->numEmployees = $numEmployees;
+  }
+
+  public function setSalaryRange(float $salaryMin, float $salaryMax)
+  {
+    $this->salaryMin = $salaryMin;
+    $this->salaryMax = $salaryMax;
+  }
+
+  public function setZipRange(int $zipMin, int $zipMax)
+  {
+    $this->zipMin = $zipMin;
+    $this->zipMax = $zipMax;
   }
 
   public function toString(): string
